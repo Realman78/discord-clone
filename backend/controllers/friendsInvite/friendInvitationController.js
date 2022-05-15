@@ -1,5 +1,9 @@
 const {postInvite} = require('./postInvite')
+const {postAccept} = require('./postAccept')
+const {postReject} = require('./postReject')
 
 module.exports = {
-    postInvite
+    postInvite,
+    postAccept,
+    postReject
 }

@@ -22,6 +22,20 @@ export const setPendingFriendsInvitation = (pendingFriendsInvitations)=>{
     }
 }
 
+export const setFriends = friends =>{
+    return {
+        type: friendsActions.SET_FRIENDS,
+        friends
+    }
+}
+
+export const setOnlineUsers = onlineUsers =>{
+    return {
+        type: friendsActions.SET_ONLINE_USERS,
+        onlineUsers
+    }
+}
+
 const sendFriendInvitation = (data, closeDialogHandler)=>{
     return async(dispatch)=>{
         const response = await api.sendFriendInvitation(data)
@@ -56,7 +70,7 @@ const rejectFriendInvitation = data=>{
             console.log('something went wrong')
             console.log(response.exception?.response?.data)
         }else{
-            console.log('Rejected Joey Joey Friended')
+            console.log('Rejected Joey')
             console.log(response)
         }
     }

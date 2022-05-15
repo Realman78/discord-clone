@@ -1,39 +1,32 @@
 import React from 'react'
 import { styled } from '@mui/material'
 import FriendsListItem from './FriendsListItem'
-
-const DUMMY_FRIENDS = [
-    {
-        id: '1',
-        username: 'Mark',
-        isOnline: true
-    },
-    {
-        id: '2',
-        username: 'Marin',
-        isOnline: false
-    },
-    {
-        id: '3',
-        username: 'Lionel',
-        isOnline: true
-    },
-    {
-        id: '4',
-        username: 'Kristijan',
-        isOnline: false
-    },
-]
+import { connect } from 'react-redux'
 
 const MainContainer = styled('div')({
     flexGrow: 1,
     width: '100%',
 })
 
-function FriendsList() {
+const checkOnlineUsers = (friends = [], onlineUsers = [])=>{
+  friends.forEach(f=>{
+    const isUserOnline = onlineUsers.find(user=>user.userId===f.id)
+    f.isOnline = isUserOnline ? true : false
+  })
+  return friends
+}
+
+function FriendsList({friends, onlineUsers}) {
+    console.log(friends)
     return (
-        <MainContainer>{DUMMY_FRIENDS.map(friend => <FriendsListItem username={friend.username} id={friend.id} key={friend.id} isOnline={friend.isOnline}/>)}</MainContainer>
+        <MainContainer>{checkOnlineUsers(friends, onlineUsers).map(friend => <FriendsListItem username={friend.username} id={friend.id} key={friend.id} isOnline={friend.isOnline}/>)}</MainContainer>
     )
 }
 
-export default FriendsList
+const mapStoreStateToProps = ({ friends }) => {
+    return {
+      ...friends,
+    }
+  };
+
+export default connect(mapStoreStateToProps)(FriendsList)

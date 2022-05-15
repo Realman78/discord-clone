@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const postRegister = async (req, res) => {
     try {
-        console.log(process.env.JWT_SECRET)
         const { username, password, mail } = req.body
         const userExists = await User.exists({ mail: mail.toLowerCase() })
         if (userExists) {
@@ -14,7 +13,10 @@ const postRegister = async (req, res) => {
             username, password: encryptedPassword, mail: mail.toLowerCase()
         }
         const user = await User.create(userBody)
-        const token = jwt.sign({ id: user._id }, process.env.TOKEN_KEY, { expiresIn: '30d' })
+        const token = jwt.sign({
+            userId: user._id,
+            mail,
+        }, process.env.TOKEN_KEY, { expiresIn: '30d' })
 
         res.status(201).json({
             userDetails: {
