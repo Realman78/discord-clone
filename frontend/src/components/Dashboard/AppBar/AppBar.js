@@ -1,6 +1,7 @@
 import React from 'react'
 import { styled } from '@mui/material'
 import DropdownMenu from './DropdownMenu'
+import ChosenOptionLabel from './ChosenOptionLabel'
 
 const MainContainer = styled('div')({
     width: 'calc(100% - 326px)',
@@ -19,6 +20,7 @@ const MainContainer = styled('div')({
 function AppBar() {
   return (
     <MainContainer>
+      <ChosenOptionLabel />
       <DropdownMenu />
     </MainContainer>
   )
