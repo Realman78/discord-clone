@@ -20,6 +20,10 @@ const friendInvitationRouter = require('./routes/friendInvitationRoutes')
 app.use('/api/auth', authRouter)
 app.use('/api/friends-invitation', friendInvitationRouter)
 
+app.get('/test', (req,res)=>{
+    return res.send({info: 'I will shred this universe down to its last atom'})
+})
+
 const server = http.createServer(app)
 socketServer.registerSocketServer(server)
 

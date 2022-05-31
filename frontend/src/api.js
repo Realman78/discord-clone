@@ -2,7 +2,7 @@ import axios from 'axios'
 import { logout } from './features/utils/auth'
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:5002',
+    baseURL: 'http://localhost:49160',
     timeout: 1000
 })
 
