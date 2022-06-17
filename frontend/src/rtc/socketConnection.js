@@ -8,7 +8,7 @@ let socket = null
 export const connectSocket = userDetails => {
     console.log(userDetails)
     const jwtToken = userDetails.token
-    socket = io('http://localhost:49160', {
+    socket = io('http://localhost:5002', {
         auth: {
             token: jwtToken
         }

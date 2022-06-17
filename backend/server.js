@@ -34,3 +34,5 @@ connectDB().then(() => {
 }).catch((e) => {
     console.log(e)
 })
+
+//https://socket.io/docs/v4/cluster-adapter/
