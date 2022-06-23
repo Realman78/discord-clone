@@ -9,14 +9,16 @@ services:
   frontend:
     # build: ./frontend
     image: realman78/discord-clone-frontend:latest
-    # ports:
-    #   - "3000:3000"
+    #ports:
+    # - "3000:3000"
     # container_name: frontend
     # stdin_open: true
     # volumes:
     #    - ./volume1
   nginx:
-    image: realman78/nginx-discord:latest
+    image: nginx:latest
     ports: 
-      - "8080:8080"
+      - "80:80"
+    volumes:
+      - ./volumes/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf
 #predat konfiguraciju preko voluma nginx-u -> dockerhub tamo ti pise
