@@ -4,8 +4,13 @@ const disconnectHandler = require('./socketHandlers/disconnectHandler')
 const socketStore = require('./socketStore')
 const directMessageHandler = require('./socketHandlers/directMessageHandler')
 const directChatHistoryHandler = require('./socketHandlers/directChatHistoryHandler')
+const roomCreateHandler = require('./socketHandlers/roomCreateHandler')
+const roomJoinHandler = require('./socketHandlers/roomJoinHandler')
+const roomLeaveHandler = require('./socketHandlers/roomLeaveHandler')
+const roomInitializeConnectionHandler = require('./socketHandlers/roomInitializeConnectionHandler')
+const roomSignalingDataHandler = require('./socketHandlers/roomSignalingDataHandler')
 
-const registerSocketServer = server=>{
+const registerSocketServer = server => {
     const io = require('socket.io')(server, {
         cors: {
             origin: '*',
@@ -13,33 +18,48 @@ const registerSocketServer = server=>{
         }
     })
     socketStore.setSocketServerInstance(io)
-    io.use((socket, next)=>{
+    io.use((socket, next) => {
         authSocket(socket, next)
     })
 
-    const emitOnlineUsers = ()=>{
+    const emitOnlineUsers = () => {
         const onlineUsers = socketStore.getOnlineUsers()
-        io.emit('online-users', {onlineUsers})
+        io.emit('online-users', { onlineUsers })
     }
 
-    io.on('connection', socket=>{
+    io.on('connection', socket => {
         console.log('user connected')
         newConnectionHandler(socket, io)
         emitOnlineUsers()
 
-        socket.on('direct-message', (data)=>{
+        socket.on('direct-message', (data) => {
             directMessageHandler(socket, data)
         })
-        socket.on('direct-chat-history', (data)=>{
-            directChatHistoryHandler(socket,data)
+        socket.on('direct-chat-history', (data) => {
+            directChatHistoryHandler(socket, data)
+        })
+        socket.on('room-create', () => {
+            roomCreateHandler(socket)
+        })
+        socket.on('room-join', data => {
+            roomJoinHandler(socket, data)
+        })
+        socket.on('room-leave', data => {
+            roomLeaveHandler(socket, data)
+        })
+        socket.on('conn-init', data => {
+            roomInitializeConnectionHandler(socket, data)
+        })
+        socket.on('conn-signal', data => {
+            roomSignalingDataHandler(socket, data)
         })
 
-        socket.on('disconnect', ()=>{
+        socket.on('disconnect', () => {
             disconnectHandler(socket)
         })
     })
 
-    setInterval(()=>{
+    setInterval(() => {
         emitOnlineUsers()
     }, 8000)
 }

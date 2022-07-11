@@ -17,7 +17,6 @@ const checkOnlineUsers = (friends = [], onlineUsers = [])=>{
 }
 
 function FriendsList({friends, onlineUsers}) {
-    console.log(friends)
     return (
         <MainContainer>{checkOnlineUsers(friends, onlineUsers).map(friend => <FriendsListItem username={friend.username} id={friend.id} key={friend.id} isOnline={friend.isOnline}/>)}</MainContainer>
     )

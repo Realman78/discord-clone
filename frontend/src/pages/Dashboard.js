@@ -9,13 +9,14 @@ import { setUserDetails } from '../store/actions/authActions'
 import {connect} from 'react-redux'
 import { getActions } from '../store/actions/authActions'
 import { connectSocket } from '../rtc/socketConnection'
+import Room from '../components/Dashboard/Room/Room'
 
 const Wrapper = styled('div')({
   width: '100%',
   height: '100%',
   display: 'flex',
 })
-function Dashboard({setUserDetails}) {
+function Dashboard({setUserDetails, isUserInRoom}) {
   useEffect(()=>{
     const userDetails = localStorage.getItem('user')
     if (!userDetails){
@@ -30,7 +31,14 @@ function Dashboard({setUserDetails}) {
     <FriendsSideBar /> 
     <Messenger /> 
     <AppBar /> 
+    {isUserInRoom && <Room />}
   </Wrapper>
+}
+
+const mapStoreStateToProps = ({room})=>{
+  return {
+    ...room
+  }
 }
 
 const mapActionsToProps = dispatch =>{
@@ -39,4 +47,4 @@ const mapActionsToProps = dispatch =>{
   }
 }
 
-export default connect(null, mapActionsToProps)(Dashboard)
+export default connect(mapStoreStateToProps, mapActionsToProps)(Dashboard)
