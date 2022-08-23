@@ -1,17 +1,19 @@
-FROM node:16
+FROM node:16 as build
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-WORKDIR /frontend
-COPY package*.json ./
+WORKDIR /app
+COPY package.json /app
 
 RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
 
-COPY . .
+COPY . /app
+
+RUN npm run build
 
 
-EXPOSE 3000
+FROM nginx:1.22.0 as run-stage
 
-ENTRYPOINT [ "npm", "start"]
+COPY --from=build /app/build /usr/share/nginx/html

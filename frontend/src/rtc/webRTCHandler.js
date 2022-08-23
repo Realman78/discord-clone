@@ -13,25 +13,25 @@ const defaultConstraints = {
 }
 
 const getConfiguration = () => {
-    const turnIceServers = {
-        iceServers: [
-            {
-                urls: [
-                    "turn:fr-turn1.xirsys.com:80?transport=udp",
-                    "turn:fr-turn1.xirsys.com:3478?transport=udp",
-                    "turn:fr-turn1.xirsys.com:80?transport=tcp",
-                    "turn:fr-turn1.xirsys.com:3478?transport=tcp",
-                    "turns:fr-turn1.xirsys.com:443?transport=tcp",
-                    "turns:fr-turn1.xirsys.com:5349?transport=tcp"
-                ],
-                username: "oMl666wMt5n_HvQNsp96b4000WnuX5Mi8tihVR9Vu2FdQ47ANgKQJntrqmCGfOC3AAAAAGGJwvptYXJpbjc4",
-                credential: "5552b7cc-40f5-11ec-b4eb-0242ac120004"
-            },
-            {
-                urls: "stun:fr-turn1.xirsys.com"
-            }
-        ]
-    }
+    const turnIceServers = null
+    //     iceServers: [
+    //         {
+    //             urls: [
+    //                 "turn:fr-turn1.xirsys.com:80?transport=udp",
+    //                 "turn:fr-turn1.xirsys.com:3478?transport=udp",
+    //                 "turn:fr-turn1.xirsys.com:80?transport=tcp",
+    //                 "turn:fr-turn1.xirsys.com:3478?transport=tcp",
+    //                 "turns:fr-turn1.xirsys.com:443?transport=tcp",
+    //                 "turns:fr-turn1.xirsys.com:5349?transport=tcp"
+    //             ],
+    //             username: "VIcxuefwdkhIEvCTWIAqDG7hmgMA35VuLP27A_HVqh-5CKyt_0BxuXBLecDD-sXQAAAAAGLP7ExsYXN0SG9wZU9mUmVhbHR5",
+    //             credential: "9d761e10-035d-11ed-a4d1-0242ac120004"
+    //         },
+    //         {
+    //             urls: "stun:fr-turn1.xirsys.com"
+    //         }
+    //     ]
+    // }
 
     if (turnIceServers) {
         return turnIceServers

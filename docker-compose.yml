@@ -3,20 +3,20 @@ services:
   backend: 
     # build: ./backend
     image: realman78/discord-clone-backend:latest
-    # ports: 
-    #   - "5002:5002"
+    ports: 
+      - "5002:5002"
     # container_name: backend
   frontend:
     # build: ./frontend
     image: realman78/discord-clone-frontend:latest
-    # ports:
-    #   - "3000:3000"
+    volumes:
+      - ./volumes/frontend/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
     # container_name: frontend
     # stdin_open: true
-    # volumes:
-    #    - ./volume1
-  nginx:
-    image: realman78/nginx-discord:latest
-    ports: 
-      - "8080:8080"
+  # nginx:
+  #   image: realman78/nginx-discord:latest
+  #   ports: 
+  #     - "8080:8080"
 #predat konfiguraciju preko voluma nginx-u -> dockerhub tamo ti pise
