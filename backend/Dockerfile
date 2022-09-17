@@ -17,4 +17,4 @@ ENV TOKEN_KEY=iWillTakeOverTheWorld
 
 EXPOSE 5002
 
-ENTRYPOINT [ "npm", "run", "server" ]
+ENTRYPOINT [ "npm", "start" ]

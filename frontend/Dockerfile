@@ -10,10 +10,11 @@ RUN npm install
 # RUN npm ci --only=production
 
 COPY . /app
+EXPOSE 3000
+# RUN npm run build
+CMD ["npm", "start"]
 
-RUN npm run build
 
+# FROM nginx:1.22.0 as run-stage
 
-FROM nginx:1.22.0 as run-stage
-
-COPY --from=build /app/build /usr/share/nginx/html
+# COPY --from=build /app/build /usr/share/nginx/html
